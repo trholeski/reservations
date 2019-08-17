@@ -34,19 +34,7 @@
                     </div>
 
                     <div class="card-body" id='tables'>
-                        <div class="card">
-                            <div class="card-header">
-                                <h2>Table #1</h2>
-                            </div>
-                            <div class="card-body">
-                                <div id="tableInfo">
-                                    <h3>ID: <span id="id">12345</span></h3>
-                                    <h3>Name:<span id="name">Person1</span></h3>
-                                    <h3>Email: <span id="email">person1@gmail.com</span></h3>
-                                    <h3>Phone: <span id="phone">555-5555</span></h3>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -59,7 +47,7 @@
                         <h4>Waiting List</h3>
                     </div>
                     <div class="card-body" id='waitlist'>
-                        <div class="card">
+                        <!-- <div class="card">
                             <div class="card-header">
                                 <h2>Table #1</h2>
                             </div>
@@ -71,9 +59,10 @@
                                     <h3>Phone:<span id="phone">555-5555</span></h3>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
+
             </div>
         </div>
         <br>
@@ -86,41 +75,68 @@
 
     <script type="text/javascript">
 
-        // $("#search-btn").on("click", function() {
-        //   var searchedCharacter = $("#character-search").val().trim();
-    
-        //   // Using a RegEx Pattern to remove spaces from searchedCharacter
-        //   // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
-        //   searchedCharacter = searchedCharacter.replace(/\s+/g, "").toLowerCase();
     
           $.get("/api/tables/", function(data) {
             console.log(data);
-            if (data) {
+            if (data.length>0) {
                 for(var i=0; i<data.length; i++) {
 
-                    var cardDiv1 = $("<div class='card'>");
+                    var cardDiv1 = $("<div class='card mt-3'>");
                     var cardDiv2 = $("<div class='card-header'>");
                     cardDiv1.append(cardDiv2);
-                    var cardDiv3 = $("<h2>Table " + i+1 + "</h2>");
+                    var cardDiv3 = $("<h2>Table " + parseInt(i+1) + "</h2>");
                     cardDiv2.append(cardDiv3);
                     var cardDiv4=$("<div class='card-body'>");
-                    cardDiv3.append(cardDiv4);
+                    cardDiv1.append(cardDiv4);
                     var cardDiv5 = $("<div id='tableInfo'>");
                     cardDiv4.append(cardDiv5);
-                    var cardDiv6 = $("<h3>ID: " + data.customerID + "</h3>");
+                    var cardDiv6 = $("<h3>ID: " + data[i].customerID + "</h3>");
                     cardDiv5.append(cardDiv6);
-                    var cardDiv7 = $("<h3>Name: " + data.customerName + "</h3>");
+                    var cardDiv7 = $("<h3>Name: " + data[i].customerName + "</h3>");
                     cardDiv6.append(cardDiv7);
-                    var cardDiv8 = $("<h3>Email: " + data.customerEmail + "</h3>");
+                    var cardDiv8 = $("<h3>Email: " + data[i].customerEmail + "</h3>");
                     cardDiv7.append(cardDiv8);
-                    var cardDiv9 = $("<h3>Phone: " + data.customerNumber + "</h3>"); 
+                    var cardDiv9 = $("<h3>Phone: " + data[i].customerNumber + "</h3>"); 
                     cardDiv8.append(cardDiv9);
+
                     $("#tables").append(cardDiv1);                
                 }
             } else {
-              $("#name").text("No reservations found.");
+              $("#tables").text("No reservations found.");
             }
           });
+
+          $.get("/api/waitlist/", function(data) {
+            console.log(data);
+            if (data.length>0) {
+                for(var i=0; i<data.length; i++) {
+
+                    var cardDiv1 = $("<div class='card mt-3'>");
+                    var cardDiv2 = $("<div class='card-header'>");
+                    cardDiv1.append(cardDiv2);
+                    var cardDiv3 = $("<h2>Table " + parseInt(i+1) + "</h2>");
+                    cardDiv2.append(cardDiv3);
+                    var cardDiv4=$("<div class='card-body'>");
+                    cardDiv1.append(cardDiv4);
+                    var cardDiv5 = $("<div id='tableInfo'>");
+                    cardDiv4.append(cardDiv5);
+                    var cardDiv6 = $("<h3>ID: " + data[i].customerID + "</h3>");
+                    cardDiv5.append(cardDiv6);
+                    var cardDiv7 = $("<h3>Name: " + data[i].customerName + "</h3>");
+                    cardDiv6.append(cardDiv7);
+                    var cardDiv8 = $("<h3>Email: " + data[i].customerEmail + "</h3>");
+                    cardDiv7.append(cardDiv8);
+                    var cardDiv9 = $("<h3>Phone: " + data[i].customerNumber + "</h3>"); 
+                    cardDiv8.append(cardDiv9);
+
+                    $("#waitlist").append(cardDiv1);                
+                }
+            } else {
+              $("#waitlist").text("No one is on the waiting list");
+              console.log('test');
+            }
+          });
+
         // });
     
       </script>
