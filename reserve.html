@@ -71,8 +71,10 @@
             console.log(data);
             if (data.length === 5) {
                 reservationNumber = 5;
+                console.log(reservationNumber);
             } else {
                 reservationNumber = 0;
+                console.log(reservationNumber);
             }
         })
 
@@ -80,10 +82,10 @@
         $("#add-btn").on("click", function (event) {
             event.preventDefault();
             var newReservation = {
-                name: $("#name").val().trim(),
+                customerName: $("#name").val().trim(),
                 phoneNumber: $("#phoneNumber").val().trim(),
-                email: $("#email").val().trim(),
-                uniqueId: $("#uniqueId").val().trim()
+                customerEmail: $("#email").val().trim(),
+                customerID: $("#uniqueId").val().trim()
             };
             if (reservationNumber === 0) {
                 $.post("/api/tables", newReservation)
