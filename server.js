@@ -62,7 +62,7 @@ app.get("/api/waitlist", function(req, res) {
   
     console.log(newTables);
   
-    tables.push(newCharacter);
+    tables.push(newTables);
   
     res.json(newTables);
   });
