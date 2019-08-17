@@ -21,17 +21,24 @@ var tables = [
         customerEmail: "testemail2",
         customerID: "testid2"
     }
-]
-//setup array of objects for the waitlist.
-var waitList = [
-    {
+];
 
-    }
-]
+//setup array of objects for the waitlist.
+var waitList = [];
 
 //Starting route to send the index page.
 app.get("/", function (req, res) {
     res.sendFile(path.join(__dirname, "index.html"));
+});
+
+//Second route for reservation table page.
+app.get("/tables", function (req, res) {
+    res.sendFile(path.join(__dirname, "tables.html"));
+});
+
+//Last route for reservation page.
+app.get("/reserve", function (req, res) {
+    res.sendFile(path.join(__dirname, "reserve.html"));
 });
 
 //route to display all tables
