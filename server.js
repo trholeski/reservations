@@ -29,10 +29,20 @@ var waitList = [
     }
 ]
 
-//basic route to send the index page.
+//Starting route to send the index page.
 app.get("/", function (req, res) {
     res.sendFile(path.join(__dirname, "index.html"));
 });
+
+//route to display all tables
+app.get("/api/tables", function(req, res) {
+    return res.json(tables);
+  });
+
+//route to display all waitlisted tables.
+app.get("/api/waitlist", function(req, res) {
+    return res.json(waitList);
+  });
 
 // Starts the server to begin listening
 app.listen(PORT, function () {
