@@ -8,20 +8,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 //setup array of objects for the reservations.
-var tables = [
-    {
-        customerName: "testname1",
-        phoneNumber: "testphone1",
-        customerEmail: "testemail1",
-        customerID: "testid1"
-    },
-    {
-        customerName: "testname2",
-        phoneNumber: "testphone2",
-        customerEmail: "testemail2",
-        customerID: "testid2"
-    }
-];
+var tables = [];
 
 //setup array of objects for the waitlist.
 var waitList = [];
