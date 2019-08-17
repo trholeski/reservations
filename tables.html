@@ -68,7 +68,7 @@
         <br>
         <div class="container">
             <p>
-                <a href="/api/tables">API Table Link</a> | <a href="/api/waitlist">API Wait List</a>
+                <a href="/api/tables">API Table Link</a> | <a href="/api/waitlist">API Wait List</a> | <a id = "clear" href="/api/clear">Clear Table</a>
             </p>
         </div>
     </div>
@@ -136,7 +136,9 @@
               console.log('test');
             }
           });
-
+          $("#clear").on("click",function(){
+              alert("Clearing tables...")
+          })
         // });
     
       </script>

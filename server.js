@@ -52,6 +52,7 @@ app.get("/api/waitlist", function(req, res) {
   
     res.json(newTables);
   });
+
   app.post("/api/waitlist", function(req, res) {
       // req.body hosts is equal to the JSON post sent from the user
       // This works because of our body parsing middleware
@@ -63,6 +64,14 @@ app.get("/api/waitlist", function(req, res) {
     
       res.json(newWaitlist);
     });
+
+//Clears array.
+app.get("/api/clear", function(req,res){
+  tables = [];
+  waitList = [];
+  res.json('end')
+});
+
 // Starts the server to begin listening
 app.listen(PORT, function () {
     console.log("App listening on PORT " + PORT);
