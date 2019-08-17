@@ -73,7 +73,7 @@ app.get("/api/waitlist", function(req, res) {
     
       console.log(newWaitlist);
     
-      waitlist.push(newWaitlist);
+      waitList.push(newWaitlist);
     
       res.json(newWaitlist);
     });
