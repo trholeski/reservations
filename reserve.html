@@ -11,6 +11,7 @@
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </head>
+
 <body>
     <div class="container">
         <div class="jumbotron text-center">
@@ -51,7 +52,7 @@
                             </div>
 
                         </form>
-                    
+
                         <div class="text-left">
                             <button type="submit" class="btn btn-primary btn-md" id="add-btn">Submit</button>
                         </div>
@@ -63,5 +64,48 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+        var reservationNumber;
+
+        function checkNumber() {
+            $.get("api/tables", function (data) {
+                console.log(data);
+                if (data.length === 5) {
+                    reservationNumber = 5;
+                    console.log(reservationNumber);
+                } else {
+                    reservationNumber = 0;
+                    console.log(reservationNumber);
+                }
+            })
+        }
+        checkNumber();
+
+        $("#add-btn").on("click", function (event) {
+            event.preventDefault();
+            var newReservation = {
+                customerName: $("#name").val().trim(),
+                phoneNumber: $("#phoneNumber").val().trim(),
+                customerEmail: $("#email").val().trim(),
+                customerID: $("#uniqueId").val().trim()
+            };
+            if (reservationNumber === 0) {
+                $.post("/api/tables", newReservation)
+                    .then(function (data) {
+                        console.log("reserve.html", data);
+                        alert("Your reservation has been confirmed.");
+                        checkNumber();
+                    });
+            } else if (reservationNumber === 5) {
+                $.post("/api/waitlist", newReservation)
+                    .then(function (data) {
+                        console.log("reserve.html", data);
+                        alert("Sorry there are no available reservations, you've been added to the waitlist.");
+                        checkNumber();
+                    });
+            }
+        });
+    </script>
 </body>
+
 </html>
