@@ -33,7 +33,7 @@
                         <h4>Current Reservations</h3>
                     </div>
 
-                    <div class="card-body">
+                    <div class="card-body" id='tables'>
                         <div class="card">
                             <div class="card-header">
                                 <h2>Table #1</h2>
@@ -58,7 +58,7 @@
                     <div class="card-header">
                         <h4>Waiting List</h3>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" id='waitlist'>
                         <div class="card">
                             <div class="card-header">
                                 <h2>Table #1</h2>
@@ -79,10 +79,51 @@
         <br>
         <div class="container">
             <p>
-                <a href="/api/tables">API Table Link</a> | <a href="/api/tables">API Wait List</a>
+                <a href="/api/tables">API Table Link</a> | <a href="/api/waitlist">API Wait List</a>
             </p>
         </div>
     </div>
+
+    <script type="text/javascript">
+
+        // $("#search-btn").on("click", function() {
+        //   var searchedCharacter = $("#character-search").val().trim();
+    
+        //   // Using a RegEx Pattern to remove spaces from searchedCharacter
+        //   // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
+        //   searchedCharacter = searchedCharacter.replace(/\s+/g, "").toLowerCase();
+    
+          $.get("/api/tables/", function(data) {
+            console.log(data);
+            if (data) {
+                for(var i=0; i<data.length; i++) {
+
+                    var cardDiv1 = $("<div class='card'>");
+                    var cardDiv2 = $("<div class='card-header'>");
+                    cardDiv1.append(cardDiv2);
+                    var cardDiv3 = $("<h2>Table " + i+1 + "</h2>");
+                    cardDiv2.append(cardDiv3);
+                    var cardDiv4=$("<div class='card-body'>");
+                    cardDiv3.append(cardDiv4);
+                    var cardDiv5 = $("<div id='tableInfo'>");
+                    cardDiv4.append(cardDiv5);
+                    var cardDiv6 = $("<h3>ID: " + data.customerID + "</h3>");
+                    cardDiv5.append(cardDiv6);
+                    var cardDiv7 = $("<h3>Name: " + data.customerName + "</h3>");
+                    cardDiv6.append(cardDiv7);
+                    var cardDiv8 = $("<h3>Email: " + data.customerEmail + "</h3>");
+                    cardDiv7.append(cardDiv8);
+                    var cardDiv9 = $("<h3>Phone: " + data.customerNumber + "</h3>"); 
+                    cardDiv8.append(cardDiv9);
+                    $("#tables").append(cardDiv1);                
+                }
+            } else {
+              $("#name").text("No reservations found.");
+            }
+          });
+        // });
+    
+      </script>
 
 </body>
 
